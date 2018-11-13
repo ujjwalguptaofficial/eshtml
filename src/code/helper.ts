@@ -1,14 +1,8 @@
 import { Global } from "./global";
 
-export function getView(viewName) {
-    let viewClass;
-    Global.viewCollecton.every((value) => {
-        if (viewName === value.name) {
-            viewClass = value.view;
-            return false;
-        }
-        return true;
-    })
-    return viewClass;
+export function getView(viewName: string) {
+    viewName = viewName.toLowerCase();
+    let viewFound = Global.viewCollecton.find(qry => qry.name === viewName);
+    return viewFound == null ? null : viewFound.view;
 }
 
