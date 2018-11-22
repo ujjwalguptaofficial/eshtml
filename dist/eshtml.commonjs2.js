@@ -1,5 +1,5 @@
 /*!
- * @license :eshtml - V0.1.0 - 13/11/2018
+ * @license :eshtml - V0.2.1 - 22/11/2018
  * https://github.com/ujjwalguptaofficial/eshtml
  * Copyright (c) 2018 @Ujjwal Gupta; Licensed MPL-2.0
  */
@@ -161,7 +161,6 @@ __webpack_require__.r(__webpack_exports__);
 function render(option) {
     return new Promise(function (resolve, reject) {
         var viewClass = Object(_helper__WEBPACK_IMPORTED_MODULE_2__["getView"])(option.view);
-        console.log("viewclass", viewClass);
         if (viewClass == null) {
             new _log_helper__WEBPACK_IMPORTED_MODULE_0__["LogHelper"](_enums_error_type__WEBPACK_IMPORTED_MODULE_1__["ERROR_TYPE"].View_Not_Found, option.view).throw();
         }
@@ -249,7 +248,7 @@ __webpack_require__.r(__webpack_exports__);
 function getView(viewName) {
     viewName = viewName.toLowerCase();
     var viewFound = _global__WEBPACK_IMPORTED_MODULE_0__["Global"].viewCollecton.find(function (qry) { return qry.name === viewName; });
-    return viewFound.view;
+    return viewFound == null ? null : viewFound.view;
 }
 
 
@@ -285,7 +284,7 @@ __webpack_require__.r(__webpack_exports__);
 function renderViewForExpress(view, model, callback) {
     var viewClass = Object(_helper__WEBPACK_IMPORTED_MODULE_0__["getView"])(view);
     if (viewClass == null) {
-        new _log_helper__WEBPACK_IMPORTED_MODULE_2__["LogHelper"](_enums_error_type__WEBPACK_IMPORTED_MODULE_1__["ERROR_TYPE"].View_Not_Found, view);
+        new _log_helper__WEBPACK_IMPORTED_MODULE_2__["LogHelper"](_enums_error_type__WEBPACK_IMPORTED_MODULE_1__["ERROR_TYPE"].View_Not_Found, view).throw();
     }
     else {
         var viewObj = new viewClass();
@@ -354,26 +353,13 @@ var Util = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FortViewEngine", function() { return FortViewEngine; });
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-/* harmony import */ var _log_helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _enums_error_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-
-
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 
 var FortViewEngine = /** @class */ (function () {
     function FortViewEngine() {
     }
     FortViewEngine.prototype.render = function (value) {
-        return new Promise(function (resolve, reject) {
-            var viewClass = Object(_helper__WEBPACK_IMPORTED_MODULE_0__["getView"])(value.view);
-            if (viewClass == null) {
-                new _log_helper__WEBPACK_IMPORTED_MODULE_1__["LogHelper"](_enums_error_type__WEBPACK_IMPORTED_MODULE_2__["ERROR_TYPE"].View_Not_Found, value.view).throw();
-            }
-            else {
-                var viewObj = new viewClass();
-                resolve(viewObj.render(value.model));
-            }
-        });
+        return Object(_render__WEBPACK_IMPORTED_MODULE_0__["render"])(value);
     };
     return FortViewEngine;
 }());

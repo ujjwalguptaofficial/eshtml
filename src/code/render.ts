@@ -5,10 +5,9 @@ import { ERROR_TYPE } from "./enums/error_type";
 import { View } from "./abstracts/view";
 import { getView } from "./helper";
 
-export function render(option: IViewOption) {
+export function render(option: IViewOption): Promise<string> {
     return new Promise((resolve, reject) => {
         const viewClass = getView(option.view);
-        console.log("viewclass", viewClass);
         if (viewClass == null) {
             new LogHelper(ERROR_TYPE.View_Not_Found, option.view).throw();
         }
