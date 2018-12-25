@@ -1,8 +1,8 @@
 import { ViewEngine } from "fortjs";
-import { IViewOption } from "fortjs";
-import { render } from "./render";
+import { ViewEngineData } from "fortjs";
+import { renderView } from "./render_view";
 export class FortViewEngine implements ViewEngine {
-    render(value: IViewOption): Promise<string> {
-        return render(value);
+    render(value: ViewEngineData): Promise<string> {
+        return renderView(value);
     }
 }

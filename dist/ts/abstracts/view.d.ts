@@ -1,3 +1,5 @@
 export declare abstract class View {
-    abstract render(model: object): string;
+    abstract render(model: {
+        [key: string]: any;
+    }): string;
 }
